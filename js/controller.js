@@ -33,5 +33,25 @@
  *     Doc Brown - 1955-11-05
  *******************************************************/
 
+import { getTime } from "./model.time.js";
+import { renderDigital } from "./view.digital.js";
+import { renderAnalog } from "./view.analog.js";
+
+setInterval(function() {
+    const time = getTime();
+    renderDigital(time);
+    renderAnalog(time);
+}, 1000);
+
 // HINT:
 // setInterval(functionName, 1000); will call functionName() every 1000 miliseconds.
+
+const saveButton = document.getElementById("saveTime");
+
+saveButton.addEventListener("click", function () {
+    const time = getTime();
+
+    localStorage.setItem("savedTime", JSON.stringify(time));
+
+    console.log("saved:", time);
+});
